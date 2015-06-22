@@ -68,10 +68,7 @@ public class CcsgCamera extends Activity {
 	        // Install a SurfaceHolder.Callback so we get notified when the
 	        // underlying surface is created and destroyed.
 	        mHolder = getHolder();
-	        mHolder.addCallback(this);
-	        // deprecated setting, but required on Android versions prior to 3.0
-	        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-	       
+	        mHolder.addCallback(this);	       
 	    }
 
 	    public void surfaceCreated(SurfaceHolder holder) {
