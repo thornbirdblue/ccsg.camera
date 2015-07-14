@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
 import android.hardware.Camera;
+import android.os.Trace;
 
 public class CcsgCamera extends Activity {
 	
@@ -25,9 +26,11 @@ public class CcsgCamera extends Activity {
 		
 		setContentView(R.layout.activity_ccsg_camera);
 		
+		Trace.beginSection("Ccsg Camera open");
 		Log.d(TAG,"open camera");
 		CcsgCam = Camera.open();
 		Log.d(TAG,"open camera end");
+		Trace.endSection();
 		
 		mPreview = new CameraPreview(this, CcsgCam);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -49,13 +52,7 @@ public class CcsgCamera extends Activity {
 	
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_ccsg_camera, menu);
-		return true;
-	}
-	
+
 	public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
 	    private SurfaceHolder mHolder;
 	    private Camera mCamera;
@@ -75,9 +72,11 @@ public class CcsgCamera extends Activity {
 	        // The Surface has been created, now tell the camera where to draw the preview.
 	    	 try {
 	             mCamera.setPreviewDisplay(holder);
+	             Trace.beginSection("Ccsg Camera StartPreview");
 	             Log.d(TAG,"StartPreview");
 	             mCamera.startPreview();
 	             Log.d(TAG,"StartPreview end");
+	             Trace.endSection();
 	        } catch (IOException e) {
 	            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
 	        }     
